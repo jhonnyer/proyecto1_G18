@@ -50,6 +50,7 @@ public class IndexController {
 		System.out.println("Variable estatica "+USERNAME);
 		System.out.println("Variable obtenida desde textos.properties: "+test);
 		System.out.println("Test conflicto ramas github");
+		System.out.println("test ramas de git");
 		System.out.println("Conexión a la base de datos de: "+mysql);
 		System.out.println(object);
 		return object;
