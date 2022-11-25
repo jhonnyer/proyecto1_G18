@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unab.app.service.TestService;
+
 @RestController
 @RequestMapping(value="/test")
 public class IndexController {
+	
+	TestService testService=new TestService();
 	
 	@Value("${text.indexController.test}")
 	private String test;
@@ -25,6 +29,8 @@ public class IndexController {
 	@RequestMapping(value="/prueba", method = RequestMethod.GET)
 	public void getPrueba1() {
 		System.out.println("Hola mundo, bienvenido");
+		String test=testService.getPrueba();
+		System.out.println("Respuesta servicio Test: "+test);
 	}
 
 	@GetMapping("/pruebaget")
