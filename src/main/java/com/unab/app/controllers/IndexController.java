@@ -49,6 +49,7 @@ public class IndexController {
 	public Object getPrueba5(@RequestBody Object object) {
 		System.out.println("Variable estatica "+USERNAME);
 		System.out.println("Variable obtenida desde textos.properties: "+test);
+		System.out.println("Test conflicto ramas github");
 		System.out.println("Conexión a la base de datos de: "+mysql);
 		System.out.println(object);
 		return object;
