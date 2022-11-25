@@ -47,7 +47,7 @@ public class IndexController {
 	
 	@PutMapping("/requestBodyput")
 	public Object getPrueba5(@RequestBody Object object) {
-		System.out.println(USERNAME);
+		System.out.println("Variable estatica "+USERNAME);
 		System.out.println(test);
 		System.out.println("Conexión a la base de datos de: "+mysql);
 		System.out.println(object);
