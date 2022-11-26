@@ -1,6 +1,7 @@
 package com.unab.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,12 @@ import com.unab.app.service.IServicio;
 public class IndexController {
 	
 	@Autowired
-	private IServicio testService;
+	@Qualifier("TestService")
+	private IServicio testService1;
+	
+	@Autowired
+	@Qualifier("HomeService")
+	private IServicio testService2;
 	
 	@Value("${text.indexController.test}")
 	private String test;
@@ -28,9 +34,15 @@ public class IndexController {
 	
 	private static final String USERNAME="Jhonnyer"; 
 	
-	@PostMapping("/testService")
+	@PostMapping("/testService1")
 	public Usuario getPrueba1(@RequestBody Usuario usuario) {
-		return testService.operacion(usuario);
+		return testService1.operacion(usuario);
+	}
+	
+	
+	@PostMapping("/testService2")
+	public Usuario getPrueba2(@RequestBody Usuario usuario) {
+		return testService2.operacion(usuario);
 	}
 	
 	@GetMapping("/pruebaget/{nombre}")

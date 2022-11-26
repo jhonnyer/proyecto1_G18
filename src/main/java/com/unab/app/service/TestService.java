@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.unab.app.models.Usuario;
 
-@Service
+@Service("TestService")
 public class TestService implements IServicio {
 	@Override
 	public Usuario operacion(Usuario usuario) {
