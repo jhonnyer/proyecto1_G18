@@ -1,5 +1,6 @@
 package com.unab.app.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,16 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unab.app.service.TestService;
+import com.unab.app.models.Usuario;
+import com.unab.app.service.IServicio;
 
 @RestController
 @RequestMapping(value="/test")
 public class IndexController {
 	
-	TestService testService=new TestService();
+	@Autowired
+	private IServicio testService;
 	
 	@Value("${text.indexController.test}")
 	private String test;
@@ -26,17 +28,9 @@ public class IndexController {
 	
 	private static final String USERNAME="Jhonnyer"; 
 	
-	@RequestMapping(value="/prueba", method = RequestMethod.GET)
-	public void getPrueba1() {
-		System.out.println("Hola mundo, bienvenido");
-		String test=testService.getPrueba();
-		System.out.println("Respuesta servicio Test: "+test);
-	}
-
-	@GetMapping("/pruebaget")
-	public String getPrueba2() {
-		System.out.println("Hola mundo, bienvenido");
-		return "Hola mundo, bienvenidos";
+	@PostMapping("/testService")
+	public Usuario getPrueba1(@RequestBody Usuario usuario) {
+		return testService.operacion(usuario);
 	}
 	
 	@GetMapping("/pruebaget/{nombre}")

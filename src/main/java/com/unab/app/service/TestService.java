@@ -2,10 +2,16 @@ package com.unab.app.service;
 
 import org.springframework.stereotype.Service;
 
+import com.unab.app.models.Usuario;
+
 @Service
-public class TestService {
-	public String getPrueba() {
+public class TestService implements IServicio {
+	@Override
+	public Usuario operacion(Usuario usuario) {
 		System.out.println("Prueba Servicio");
-		return "Test Service";
+		System.out.println(usuario);
+		System.out.println(usuario.getUsername());
+		System.out.println(usuario.getPassword());
+		return usuario;
 	}
 }
