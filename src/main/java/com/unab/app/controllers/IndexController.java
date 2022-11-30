@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unab.app.interfaces.IServicio;
 import com.unab.app.models.Usuario;
-import com.unab.app.service.IServicio;
 
 @RestController
 @RequestMapping(value="/test")

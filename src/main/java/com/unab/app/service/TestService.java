@@ -2,6 +2,7 @@ package com.unab.app.service;
 
 import org.springframework.stereotype.Service;
 
+import com.unab.app.interfaces.IServicio;
 import com.unab.app.models.Usuario;
 
 @Service("TestService")

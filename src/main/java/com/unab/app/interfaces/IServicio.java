@@ -1,4 +1,4 @@
-package com.unab.app.service;
+package com.unab.app.interfaces;
 
 import com.unab.app.models.Usuario;
 

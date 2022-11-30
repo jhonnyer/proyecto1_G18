@@ -10,27 +10,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="detalleFactura")
-public class DetalleFactura implements Serializable{
-	
+@Table(name = "detalleFactura")
+public class DetalleFactura implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_detalle_factura")
+	@Column(name = "id_detalle_factura")
 	private Long id;
-	
-	@Column(name="cantidad")
+
+	@Column(name = "cantidad")
 	private Integer cantidad;
-	
+
 	@ManyToOne()
-	@JoinColumn(name="factura_id_factura", referencedColumnName="id_factura")
+	@JoinColumn(name = "factura_id_factura", referencedColumnName = "id_factura")
 	private Factura factura;
-	
+
 	@ManyToOne()
-	@JoinColumn(name="producto_id_producto", referencedColumnName="id_producto")
+	@JoinColumn(name = "producto_id_producto", referencedColumnName = "id_producto")
 	private Producto producto;
 
 	public DetalleFactura() {
@@ -56,6 +56,21 @@ public class DetalleFactura implements Serializable{
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	
-	
+
+	public Factura getFactura() {
+		return factura;
+	}
+
+	public void setFactura(Factura factura) {
+		this.factura = factura;
+	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
 }
