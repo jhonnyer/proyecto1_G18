@@ -25,7 +25,7 @@ public class ProductoController {
 		return productoService.findByNombre(nombre);
 	}
 	
-	@GetMapping("/findByNombre/{id}")
+	@GetMapping("/findById/{id}")
 	public Producto findProductoById(@PathVariable("id") Long id) {
 		return productoService.findProductoById(id);
 	}
@@ -39,7 +39,7 @@ public class ProductoController {
 	
 	@GetMapping("/listar")
 	public Page<Producto> findAll() {
-		Pageable pageable=PageRequest.of(1, 10);
+		Pageable pageable=PageRequest.of(0, 5);
 		return productoService.findAll(pageable);
 	}
 }
