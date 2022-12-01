@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.unab.app.dao.IClienteDAO;
@@ -33,12 +35,21 @@ public class ClienteServiceImpl implements IClienteService{
 
 	@Override
 	public Cliente findOne(Long id) {
-		return clienteDao.findById(id).orElse(new Cliente());
+		Cliente cliente= clienteDao.findById(id).orElse(new Cliente());
+		cliente.setNombre(cliente.getNombre()+" Fernando");
+		clienteDao.save(cliente);
+		return cliente;
 	}
 
 	@Override
-	public void delete(Long id) {
-		clienteDao.deleteById(id);
+	public  ResponseEntity<String> delete(Long id) {
+		Cliente cliente=clienteDao.findById(id).orElse(new Cliente());
+		
+		if(cliente.getId()!=null && cliente.getId()>0) {
+			clienteDao.deleteById(id);
+			return new ResponseEntity<String> ("El cliente "+cliente.getNombre()+" fue eliminado con éxito",  HttpStatus.OK);
+		}
+		return new ResponseEntity<String> ("El cliente "+cliente.getNombre()+" no pudo ser eliminado, porque no existe en la base de datos",  HttpStatus.NOT_FOUND);
 	}
 
 }

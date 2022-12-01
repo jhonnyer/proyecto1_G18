@@ -46,15 +46,22 @@ public class FacturaServiceImpl implements IFacturaService{
 	}
 
 	@Override
-	public void updateFactura(String nombreProducto, Long id_factura) {
-		Producto producto=productoDao.findByNombre(nombreProducto);
+	public void updateFactura(Long idFactura, Long idProducto) {
+		Producto producto=productoDao.findProductoById(idProducto);
+		System.out.println("Producto a actualizar: "+producto.getNombre());
 		
-		List<DetalleFactura> listDetalleFactura=detalleFacturaService.findDetalleFacturaByIdFacturaByIdProducto(id_factura, producto.getId());
+		List<DetalleFactura> listDetalleFactura=detalleFacturaService.findDetalleFacturaByIdFacturaByIdProducto(idFactura, idProducto);
 		
-		Factura factura=this.findFacturById(id_factura);
-		
-		factura.setValorTotal(2_500_000L);
-		facturaDao.save(factura);
+		Factura factura=this.findFacturById(idFactura);
+	
+		listDetalleFactura.forEach(t->{
+			t.setCantidad(10);
+			Integer cantidad=t.getCantidad();
+			Long precio=t.getProducto().getPrecio();
+			Long newValor=cantidad*precio;
+			factura.setValorTotal(newValor);
+			facturaDao.save(factura);
+		});
 		
 		//Utilizacion Bucle For
 		
@@ -62,9 +69,7 @@ public class FacturaServiceImpl implements IFacturaService{
 			System.out.println("Lista con for tradicional: "+listDetalleFactura.get(x));
 		}
 		
-		listDetalleFactura.forEach(t->{
-			System.out.println("Lista con funcion flecha: "+t);
-		});
+		
 		
 	}
 

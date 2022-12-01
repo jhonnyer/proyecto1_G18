@@ -14,5 +14,5 @@ public interface IFacturaService {
 	
 	public List<Factura> fetchFacturaByIDCliente(Long id);
 	
-	public void updateFactura(String nombreProducto, Long id_factura);
+	public void updateFactura(Long idFactura, Long idProducto);
 }
