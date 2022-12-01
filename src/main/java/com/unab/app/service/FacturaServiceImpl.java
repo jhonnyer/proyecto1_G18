@@ -69,7 +69,9 @@ public class FacturaServiceImpl implements IFacturaService{
 			System.out.println("Lista con for tradicional: "+listDetalleFactura.get(x));
 		}
 		
-		
+		for(DetalleFactura d: listDetalleFactura) {
+			System.out.println("Lista for 1: "+d);
+		}
 		
 	}
 
