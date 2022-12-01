@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.unab.app.dao.IDetalleFacturaDAO;
 import com.unab.app.interfaces.IDetalleFacturaService;
 import com.unab.app.models.DetalleFactura;
+import com.unab.app.models.Factura;
 
 @Service
 public class DetalleServiceImpl implements IDetalleFacturaService{
@@ -17,6 +18,8 @@ public class DetalleServiceImpl implements IDetalleFacturaService{
 	
 	@Override
 	public void save(DetalleFactura detalleFactura) {
+		Factura factura=detalleFactura.getFactura();
+		System.out.println(factura.getObservacion());
 		detalleFacturaDao.save(detalleFactura);
 	}
 
