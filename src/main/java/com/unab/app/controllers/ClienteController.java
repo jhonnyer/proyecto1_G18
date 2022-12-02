@@ -32,6 +32,7 @@ public class ClienteController {
 		return clienteService.findAll();
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/listarPageable")
 	public Page<Cliente> findAll(){
 		Pageable pageable=Pageable.ofSize(10);
