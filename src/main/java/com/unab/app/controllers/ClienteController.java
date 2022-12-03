@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.unab.app.interfaces.IClienteService;
 import com.unab.app.models.Cliente;
 
+@CrossOrigin(origins = "")
 @RestController
 @SessionAttributes("cliente")
 @RequestMapping(value="/cliente")
@@ -26,7 +27,7 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteService;
 	
-	@Secured({"ROLE_USER"})
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@GetMapping("/listar")
 	public List<Cliente> getClientes(){
 		return clienteService.findAll();
@@ -39,17 +40,20 @@ public class ClienteController {
 		return clienteService.findAll(pageable);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/save")
 	public Cliente save(@RequestBody Cliente cliente) {
 		clienteService.save(cliente);
 		return cliente;
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/getCliente/{id}")
 	public Cliente findOne(@PathVariable("id") Long id) {
 		return clienteService.findOne(id);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/delete/{id}")
 	public ResponseEntity<String> deleteCliente(@PathVariable("id") Long id){
 		return clienteService.delete(id);

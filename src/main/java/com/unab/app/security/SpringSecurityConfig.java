@@ -6,7 +6,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.unab.app.security.filter.JWTAuthenticationFilter;
+import com.unab.app.security.filter.JWTAuthorizationFilter;
+import com.unab.app.security.tokenUtil.IJWTService;
 
 @SuppressWarnings("deprecation")
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
@@ -19,16 +24,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private RepositoryUserDetailService userDetailsService;
 
+	@Autowired
+	private IJWTService jwtService;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			//.httpBasic()
 			.authorizeRequests()
 			.anyRequest()
 			.authenticated()
 			.and()
-			.httpBasic()
-			.and()
-			.sessionManagement();
+			.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtService))
+			.addFilter(new JWTAuthorizationFilter(authenticationManager(),jwtService))
+			.csrf()
+			.disable()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
 
