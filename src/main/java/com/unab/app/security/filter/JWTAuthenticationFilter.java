@@ -82,7 +82,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		String token=jwtService.create(authResult);
 		
-		response.addHeader(JWTServiceImpl.HEADER_STRING,JWTServiceImpl.TOKEN_PREFIX + token);
+        response.addHeader(JWTServiceImpl.HEADER_STRING,JWTServiceImpl.TOKEN_PREFIX + token);
 		
 		Map<String, Object> body=new HashMap<String, Object>();
 		body.put("token", token);

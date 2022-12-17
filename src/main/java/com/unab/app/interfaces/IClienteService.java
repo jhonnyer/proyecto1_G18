@@ -13,9 +13,11 @@ public interface IClienteService {
 
 	public Page<Cliente> findAll(Pageable pageable);
 
-	public void save(Cliente cliente);
+	public ResponseEntity<?> save(Cliente cliente);
+	
+	public ResponseEntity<?> update(Long id, Cliente cliente);
 
-	public Cliente findOne(Long id);
+	public ResponseEntity<?> findOne(Long id);
 
-	public ResponseEntity<String> delete(Long id);
+	public ResponseEntity<?> delete(Long id);
 }

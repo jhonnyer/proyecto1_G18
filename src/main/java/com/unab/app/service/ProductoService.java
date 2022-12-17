@@ -1,5 +1,8 @@
 package com.unab.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +17,14 @@ public class ProductoService implements IProductoService{
 	@Autowired
 	private IProductoDAO productoDao;
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public Producto findByNombre(String nombre) {
-		return productoDao.findByNombre(nombre);
+	public List<Producto> findByNombre(String nombre) {
+		try {
+			return (List<Producto>) productoDao.findByNombre(nombre);
+		}catch(Exception e) {
+			return new ArrayList<Producto>();
+		}
 	}
 
 	@Override
